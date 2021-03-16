@@ -10,12 +10,12 @@
             all-tests))]))
 
 (define (run-compile expr)
-  (let ([p (open-output-file "stst.s" 'replace)])
+  (let ([p (open-output-file "stst.ll" 'replace)])
     (compile-program expr p)
     (close-output-port p)))
 
 (define (build)
-  (unless (zero? (system "gcc -o stst startup.c stst.s"))
+  (unless (zero? (system "clang  -o stst -I /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/include startup.c stst.ll 2> /dev/null"))
     (error 'make "could not build target")))
 
 (define (execute)
@@ -95,12 +95,12 @@
     (lambda (p)
        (unless (output-port? p) 
          (error 'compile-port "not an output port ~s" p))
-       p)))
+        p)))
 
 (define show-compiler-output (make-parameter #f))
 
 (define (run-compile expr)
-  (let ([p (open-output-file "stst.s" 'replace)])
+  (let ([p (open-output-file "stst.ll" 'replace)])
     (parameterize ([compile-port p])
        (compile-program expr))
     (close-output-port p)))
