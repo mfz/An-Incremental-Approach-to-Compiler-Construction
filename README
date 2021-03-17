@@ -1,3 +1,15 @@
+Implementation of Scheme to LLVM compiler 
+based on 
+Abdulaziz Ghuloum's 'An Incremental Approach to Compiler Construction'
+
+compiler.scm and startup.c are updated for every step.
+Every step is tagged.
+
+Uses clang instead of gcc.
+
+----
+
+Original README
 
 To run the tests, make sure that your compiler file is called
 "compiler.scm", and that at the top of that file, you have:
